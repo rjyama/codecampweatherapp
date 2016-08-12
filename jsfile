@@ -1,0 +1,40 @@
+var weather;
+var globalloc;
+
+function trackLoc(){
+
+  var location = "";
+  
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    location += "http://api.openweathermap.org/data/2.5/weather?lat=" +position.coords.latitude+ "&lon=" +position.coords.longitude+ "&appid=1cc5986f24921b497ac2b2340edaceb6";
+    globalloc = location;
+    getJsonData(location);
+    });
+  }
+else {
+  $(".loc").html("Location not working");
+  }
+}
+
+function getJsonData(apiLink){
+  var testdata = "";
+  var testitems = [];
+  $(".loc").html("API Link is: <strong>" + apiLink);
+  $.getJSON(apiLink, function(result){
+    
+    $.each(result, function(val, key){
+      var keys = Object.keys(key);
+      if (val === "name"){
+        testdata += "<div>City " + val + ": "+ key + "</div>";
+      }
+      if (val === "sys"){
+        testdata += "<div>City " + val + ": "+ keys + "</div>";
+      }
+      
+    });
+    $(".weather").html(testdata);
+  });  
+};
+
+window.onload = trackLoc();
