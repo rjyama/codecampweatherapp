@@ -1,0 +1,13 @@
+.maindiv {
+  background-color: gray;
+  padding: 30px;
+  margin: 150px 200px 150px 200px;
+}
+
+.loc {
+  color: pink;
+}
+
+.weather {
+  color: yellow;
+}
