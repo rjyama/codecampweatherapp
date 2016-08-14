@@ -1,3 +1,5 @@
+var globalTestdata = "";
+
 function trackLoc(){
 
   var location = "";
@@ -25,18 +27,25 @@ function getJsonData(apiLink){
         testdata += "<div>City: "+ key + "</div>";
       }
       if (val === "sys"){
-        $.each(key, function(rdata, gdata){
+        /*$.each(key, function(rdata, gdata){
           if (rdata === "country"){
           testdata += "Country: " + gdata;
           };
-        });
-        //testdata += "<div>City " + val + ": "+ keys +"</div>";
+        });*/
+        testdata += showScnddata(key, "Country", testdata);
       }
-      
     });
     $(".weatherhere").html(testdata);
   });  
-  
+};
+
+function showScnddata(dataCateg, toGet, blankData){
+  $.each(dataCateg, function(fData, sData){
+    if (fData === toGet.toLowerCase()){
+      blankData += toGet + ": " + sData;
+    };
+  });
+  return blankData;
 };
 
 window.onload = trackLoc();
